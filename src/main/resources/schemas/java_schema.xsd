@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="java_schema" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="java_schema">
+
+    <element name="javaSource" type="tns:javaSourceType" />
+    
+    <complexType name="importType">
+    	<sequence>
+    		<element name="import" type="string" maxOccurs="unbounded" minOccurs="1" />
+    	</sequence>
+    </complexType>
+
+    <complexType name="classType">
+    	<sequence>
+    		<element name="attributes" type="tns:attributesType" />
+    		<element name="constructors" type="string" />
+    		<element name="methods" type="tns:methodsType" />
+    	</sequence>
+    	<attribute name="name" type="string" use="required" />
+    	<attribute name="accessor" type="string" />
+    	<attribute name="final" type="boolean" use="optional" default="false" />
+    </complexType>
+
+    <complexType name="parameterDefineType">
+    	<attribute name="name" type="string" use="required" />
+    	<attribute name="type" type="string" use="required" />
+    </complexType>
+
+    <complexType name="javaSourceType">
+    	<sequence>
+    		<element ref="tns:package" minOccurs="0" maxOccurs="1"></element>
+            <element ref="tns:imports"></element>
+            <element ref="tns:class" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    	<attribute name="filename" type="string" use="required" />
+    </complexType>
+
+    <complexType name="attributesType">
+    	<attribute name="name" type="string" use="required" />
+    	<attribute name="accessor" type="string" use="optional" />
+    	<attribute name="type" type="string" use="required" />
+    	<attribute name="final" type="boolean" use="optional" default="false" />
+    	<attribute name="value" type="string" use="optional" />
+    </complexType>
+
+    <complexType name="assignmentType">  
+        <sequence>
+            <element name="lhs" type="string" />
+            <element name="rhs" type="tns:rhsType" />
+        </sequence>
+    </complexType>
+
+    <complexType name="rhsType">
+        <choice>      
+            <element name="objectCreate" type="tns:objectCreateType" />
+            <element name="value" type="string" />
+            <element name="methodCall" type="tns:methodCallType" />
+        </choice>
+    </complexType>
+
+    <complexType name="objectCreateType">
+    	<attribute name="type" type="string" />
+    </complexType>
+
+    <complexType name="parameterCreateType">  
+        <sequence>
+            <element name="value" type="string" />
+        </sequence>
+    </complexType>
+    
+    <complexType name="methodCallType">
+    	<attribute name="name" type="string" use="required" />
+    	<attribute name="objectName" type="string" use="required" />
+    </complexType>
+
+    <complexType name="methodsType">  
+        <sequence>
+            <element name="method" type="tns:methodType" />
+        </sequence>
+    </complexType>
+
+    <complexType name="methodType">
+    	<attribute name="name" type="string" />
+    	<attribute name="returnType" type="string" />
+    	<attribute ref="tns:accessor"></attribute>
+    </complexType>
+
+    <simpleType name="accessorType">
+    	<restriction base="string">
+            <enumeration value="public" />
+            <enumeration value="private" />
+            <enumeration value="default" />
+            <enumeration value="protected" />
+        </restriction>
+    </simpleType>
+
+    <element name="class" type="tns:classType"></element>
+
+    <element name="methods" type="tns:methodsType"></element>
+
+    <element name="package" type="string"></element>
+
+    <element name="imports" type="tns:importType"></element>
+
+    <element name="assignment" type="tns:assignmentType"></element>
+
+    <attribute name="name" type="string"></attribute>
+
+    <attribute name="accessor" type="tns:accessorType"></attribute>
+
+
+    <element name="type" type="tns:typeType"></element>
+    
+    <complexType name="typeType">
+    	<choice>
+    		<element ref="tns:simpleType"></element>
+    		<element ref="tns:genericType"></element>
+    	</choice>
+    </complexType>
+    
+    <element name="simpleType" type="string"></element>
+
+    <element name="genericType" type="string"></element>
+
+    <element name="innerType" type="tns:typeType"></element>
+    
+    <complexType name="innerType"></complexType>
+
+    <complexType name="genericType">
+    	<sequence>
+            <element ref="tns:outerType"></element>
+            <element ref="tns:innerType"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="outerType" type="string"></element>
+</schema>

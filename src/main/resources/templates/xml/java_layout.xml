@@ -1,0 +1,58 @@
+<javaSource
+xsi:noNamespaceSchemaLocation="../schemas/java_schema.xsd"
+xmlns:xsi="java_schema"
+filename="JavaMethod.java">
+  <package>com.miterfish.pBuilder.langauges.java</package>
+  <class name="JavaMethod" accessor="public">
+    <type>
+    	<arrayType>
+	    	<ellipseType>
+	    		<simpleType>boolean</simpleType>
+	    	</ellipseType>
+    	</arrayType>
+    </type>
+    <attributes>
+      <attribute name="name" accessor="private" type="String" />
+      <attribute name="parameters" accessor="private" type="List[Object]"/>
+      <attribute name="returnType" accessor="private" type="String" />
+      <attribute name="accessor" accessor="private" type="AccessorType" />
+    </attributes>
+    <constructors>
+      <constructor accessor="public">
+        <statements>
+          <assignment lhs="name" rhs='"Unknown"' />
+          <assignment lhs="returnValue" rhs='void' />
+          <assignment lhs="parameters" rhs='null' />
+        </statements>
+      </constructor>
+                               
+      <constructor accessor="public">
+        <parameters>
+          <parameter name="methodName" type="String"/>
+          <parameter name="returnValue" type="String" />
+          <parameter name="parameterTypes" type="Object..." />
+        </parameters>
+        <statements>
+          <assignment lhs="name" rhs="methodName" />
+          <assignment lhs="this.returnValue" rhs="returnValue" />
+          <assignment lhs="parameters" rhs="new Arraylist[Object](Arrays.asList(parameterTypes))" />
+        </statements>
+      </constructor>
+    </constructors>
+    <methods>
+      <method name="setAccessorType" returnType="void" accessor="public">
+        <parameters>
+          <parameter name="type" type="AccessorType" />
+        </parameters>
+        <statements>
+          <assignment lhs="accessor" rhs="type" />
+        </statements>
+      </method>
+      <method name="getAccessorType" returnType="AccessorType" accessor="public">
+        <statements>
+          <return value="accessor" />
+        </statements>
+      </method>
+    </methods>
+  </class>
+</javaSource>

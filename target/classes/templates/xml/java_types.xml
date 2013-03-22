@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- would be parsed to: -->
+<!-- Integer -->
+<type>
+	<simpleType>Integer</simpleType>
+</type>
+<!-- Freemarker: -->
+<!-- <#if type.simpleType??>${type.simpleType}</#if> -->
+
+<!-- would be parsed to -->
+<!-- List<String> -->
+<type>
+	<genericType>
+		<outerType>List</outerType>
+		<innerType>
+			<simpleType>String</simpleType>
+		</innerType>
+	</genericType>
+</type>
+
+
+<!-- would be parsed to -->
+<!-- Double... -->
+<type>
+	<ellipseType>
+		<simpleType>Double</simpleType>
+	</ellipseType>
+</type>
+
+<!-- would be parsed to -->
+<!-- boolean[] -->
+<type>
+	<arrayType>
+		<simpleType>boolean</simpleType>
+		<dimensions>
+			<dimension />
+		</dimensions>
+	</arrayType>
+</type>
+
+<!-- would be parsed to -->
+<!-- int[4] -->
+<type>
+	<arrayType>
+		<simpleType>int</simpleType>
+		<dimensions>
+			<dimension>4</dimension>
+		</dimensions>
+	</arrayType>
+</type>
+
+<!-- would be parsed to -->
+<!-- Map<String, Integer> -->
+<type>
+	<genericType>
+		<outerType>Map</outerType>
+		<innerType>
+			<typeList>
+				<simpleType>String</simpleType>
+				<simpleType>Integer</simpleType>
+			</typeList>
+		</innerType>
+	</genericType>
+</type>
+
+<!-- would be parsed to -->
+<!-- Map<String, Map<String, Integer>> -->
+<type>
+	<genericType>
+		<outerType>Map</outerType>
+		<innerType>
+			<typeList>
+				<simpleType>String</simpleType>
+				<genericType>
+					<outerType>Map</outerType>
+					<innerType>
+						<typeList>
+							<simpleType>String</simpleType>
+							<simpleType>Integer</simpleType>
+						</typeList>
+					</innerType>
+				</genericType>
+			</typeList>
+		</innerType>
+	</genericType>
+</type>
+
+
+<!-- would be parsed to: -->
+<!-- System.out.println("Hello World!") -->
+<statement operator="dot">
+  <lhs>System</lhs>
+  <rhs>
+  	<statement operator="dot">
+  		<lhs>out</lhs>
+  		<rhs>
+  			<methodCall name="println">
+  				<parameters>
+  					<parameter>
+  						<value>"Hello World!"</value>
+  					</parameter>
+  				</parameters>
+  			</methodCall>
+  		</rhs>
+  	</statement>
+  </rhs>
+</statement>
