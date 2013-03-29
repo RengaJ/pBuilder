@@ -1,4 +1,4 @@
-package com.miterfish.pBuilder.enums;
+package com.miterfish.fishbowl.enums;
 
 public enum CommentType
 {

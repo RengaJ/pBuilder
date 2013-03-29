@@ -1,4 +1,4 @@
-package com.miterfish.pBuilder.test;
+package com.miterfish.fishbowl.test;
 
 import java.io.File;
 import java.io.IOException;
