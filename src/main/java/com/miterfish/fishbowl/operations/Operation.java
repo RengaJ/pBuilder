@@ -16,21 +16,12 @@ public abstract class Operation implements IOperation
 	protected String operatorName;
 	
 	/**
-	 * A Map that associates strings (the parameter names) with the values that
-	 * they represent.
+	 * A Map that associates strings (the parameter names) with the different properties that the
+	 * parameter can have (the ParameterProperty).
 	 * <br>
-	 * For example, the parameter "Type" could be associated with the value of 'boolean'
+	 * For example, the parameter "Type" could be mandatory with a type of {@code PrimitiveType.Boolean}
 	 */
-	protected LinkedHashMap<String, Object> parameters;
-
-	/**
-	 * A Map that associates strings (the parameter names) with what types are allowed to be
-	 * associated with them.
-	 * <br>
-	 * For example, the parameter "Name" would be associated with {@code Class<String>}.
-	 */
-	protected LinkedHashMap<String, Class<?>> parameterLinks;
-	
+	protected LinkedHashMap<String, ParameterProperty<?>> parameters;
 	/**
 	 * Default (and only) constructor
 	 * @param name The name of the operator (to be displayed on the graphical bubble).
@@ -41,30 +32,28 @@ public abstract class Operation implements IOperation
 		operatorName = name;
 		operatorCharacter = operatorChar;
 		
-		parameters = new LinkedHashMap<String, Object>();
-		parameterLinks = new LinkedHashMap<String, Class<?>>();
+		parameters = new LinkedHashMap<String, ParameterProperty<?>>();
 		
-		setParameterNames();
-		setParameterLinks();
+		setParameterProperties();
 	}
 	
 	/**
 	 * Associates parameters with their values.
 	 * <br>For example, the parameter "Name" could be associated with "x"
 	 */
-	protected abstract void setParameterNames();
-	
-	/**
-	 * Associates parameters with their types.
-	 * <br>For example, the parameter "Name" would be associated with {@code Class<String>}.
-	 */
-	protected abstract void setParameterLinks();
+	protected abstract void setParameterProperties();
 	
 	/**
 	 * Ensures that the proper values and types have been associated with the operator.
 	 * @return {@code true} if the operator has all necessary parameters filled properly.
 	 */
 	protected abstract boolean validate();
+	
+	/**
+	 * Gets the code fragment that this operator would represent
+	 * @return The code fragment that this operator represents in Java code
+	 */
+	protected abstract String toCodeFragment();
 	
 	// Comments defined in implementing interface
 	public String getText()
@@ -73,8 +62,20 @@ public abstract class Operation implements IOperation
 	}
 	
 	// Comments defined in implementing interface
+	public char getOperatorCharacter()
+	{
+		return operatorCharacter;
+	}
+	
+	// Comments defined in implementing interface
 	public String[] getParameterNames()
 	{
 		return parameters.keySet().toArray(new String[]{});
+	}
+	
+	// Comments defined in implementing interface
+	public boolean canBeParameterInput()
+	{
+		return false;
 	}
 }

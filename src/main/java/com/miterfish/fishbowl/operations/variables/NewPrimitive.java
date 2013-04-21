@@ -3,6 +3,7 @@ package com.miterfish.fishbowl.operations.variables;
 import javax.lang.model.type.PrimitiveType;
 
 import com.miterfish.fishbowl.operations.Operation;
+import com.miterfish.fishbowl.operations.ParameterProperty;
 
 public class NewPrimitive extends Operation
 {
@@ -12,20 +13,12 @@ public class NewPrimitive extends Operation
 	}
 	
 	@Override
-	protected void setParameterNames()
+	protected void setParameterProperties()
 	{
-		parameters.put("Type", null);
-		parameters.put("Name", null);
-	}
-	
-	@Override
-	protected void setParameterLinks()
-	{
-		parameterLinks.put("Type", PrimitiveType.class);
-		parameterLinks.put("Name", String.class);
+		parameters.put("Type", new ParameterProperty<PrimitiveType>(true, PrimitiveType.class));
+		parameters.put("Name", new ParameterProperty<String>(true, String.class));
 	}
 
-	public char getOperatorCharacter() { return 0; }
 	public int getMinInputCount() { return 0; }
 	public int getMinOutputCount() { return 0; }
 	public int getMinParameterCount() { return 2; }
@@ -34,4 +27,18 @@ public class NewPrimitive extends Operation
 	{
 		return true;
 	}
+	public int getMaxInputCount() { return 0; }
+	public int getMaxOutputCount() { return 0; }
+	public int getMaxParameterCount() { return 2; }
+	
+	@Override
+	public boolean canBeParameterInput() { return true; }
+
+	@Override
+	public String toCodeFragment()
+	{
+		return null;
+	}
+	
+	
 }

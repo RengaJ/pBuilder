@@ -22,7 +22,45 @@ public interface IOperation
 	 */
 	public char getOperatorCharacter();
 	
+	/**
+	 * Gets the minimum number of inputs that this operator supports ( can be either 0 or 1 )
+	 * @return The minimum number of inputs that the operator supports
+	 */
 	public int getMinInputCount();
+	
+	/**
+	 * Gets the minimum number of outputs that this operator supports
+	 * @return The minimum number of outputs that the operator supports
+	 */
 	public int getMinOutputCount();
+	
+	/**
+	 * Gets the minimum number of parameters that the operator supports
+	 * @return The minimum number of parameter that the operator supports
+	 */
 	public int getMinParameterCount();
+	
+	/**
+	 * Gets the maximum number of inputs that this operator supports (can be either 0 or 1)
+	 * @return The maximum number of inputs that the operator supports
+	 */
+	public int getMaxInputCount();
+	
+	/**
+	 * Gets the maximum number of outputs that this operator supports
+	 * @return The maximum number of outputs that the operator supports
+	 */
+	public int getMaxOutputCount();
+	
+	/**
+	 * Gets the maximum number of parameters that this operator supports
+	 * @return The maximum number of parameters that the operator supports
+	 */
+	public int getMaxParameterCount();
+	
+	/**
+	 * Determines if the operator can be used as a value for another operator's parameter
+	 * @return {@code true} if the operator can be used as a value for another operator's parameter 
+	 */
+	public boolean canBeParameterInput();
 }
