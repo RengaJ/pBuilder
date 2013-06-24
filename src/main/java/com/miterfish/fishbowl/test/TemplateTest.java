@@ -21,7 +21,7 @@ import freemarker.template.TemplateException;
 
 public class TemplateTest
 {
-	public static void main(String[] args)
+	public static void mainTest(String[] args)
 	{
 		Configuration configuration = new Configuration();
 		try
